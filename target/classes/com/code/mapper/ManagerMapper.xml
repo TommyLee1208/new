@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.mapper.ManagerMapper">
+
+    <!-- 根据id来更新员工信息 -->
+    <update id="updateUser">
+        update emp
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="entrydate != null">
+                entrydate = #{entrydate},
+            </if>
+            <if test="dept_id != null">
+                dept_id = #{dept_id},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据员工id重置密码 -->
+    <update id="ResetPassword">
+        update emp
+        SET password = #{rawPassword}
+        where id in
+        <foreach item="id" collection="ids" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!-- 批量删除员工 (1,2,3) -->
+    <delete id="deleteUser">
+        delete from emp
+        where id in
+        <foreach collection="list" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 分页查询条件查询员工信息 -->
+    <select id="page" resultType="com.code.pojo.User">
+        select * from emp
+        <where>
+            <if test="name != null">
+                and name like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+            <if test="dept_id != null">
+                and dept_id = #{dept_id}
+            </if>
+        </where>
+        order by update_time DESC
+        limit #{start}, #{pageSize}
+    </select>
+    <select id="getSalariesByEmpId" resultType="com.code.pojo.Salary">
+        select * from salary
+        where emp_id = #{emp_id}
+    </select>
+
+</mapper>

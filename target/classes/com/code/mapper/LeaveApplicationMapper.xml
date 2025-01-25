@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.mapper.LeaveApplicationMapper">
+    <insert id="insertLeaveApplication" parameterType="com.code.pojo.LeaveApplication">
+        insert into leave_application
+            (emp_id, leave_type, start_time, end_time, approve_time, apply_time, remarks)
+        values (#{emp_id}, #{leave_type}, #{start_time}, #{end_time}, #{approve_time}, now(), #{remarks})
+    </insert>
+    <select id="getLeaveApplicationByEmpId" resultType="com.code.pojo.LeaveApplication">
+        select * from leave_application where emp_id = #{emp_id}
+        order by apply_time desc
+    </select>
+
+
+</mapper>
