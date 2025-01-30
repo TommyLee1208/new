@@ -588,10 +588,5 @@ public class ManagerController {
             log.error("获取打卡记录列表时出错: {}", e.getMessage());
             return Result.error(e.getMessage());
         }
-
-
     }
-
-
-
 }

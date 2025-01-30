@@ -33,7 +33,9 @@ public interface AttendanceMapper {
      * 查询所有打卡记录
      * @return
      */
-    @Select("select * from attendance")
+    @Select("SELECT a.*, e.name " +
+            "FROM attendance a " +
+            "JOIN emp e ON a.emp_id = e.id")
     List<Attendance> getAllAttendanceRecords();
 
 }

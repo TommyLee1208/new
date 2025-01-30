@@ -33,7 +33,8 @@ public interface LeaveApplicationMapper {
      * @param approvedByManager 审批状态
      * @return 包含所有具有指定审批状态的请假申请记录的列表
      */
-    @Select("select * from leave_application WHERE approved_by_manager = #{approved_by_manager}")
+    @Select("select a.*,e.name from leave_application a join emp e on a.emp_id = e.id " +
+            "where a.approved_by_manager = #{approved_by_manager} order by a.apply_time desc")
     List<LeaveApplication> getLeaveApplicationsByApprovalStatus(Integer approvedByManager);
 
     /**
@@ -41,7 +42,9 @@ public interface LeaveApplicationMapper {
      *
      * @return 包含所有请假申请记录的列表
      */
-    @Select("select * from leave_application")
+    @Select("SELECT la.*, e.name " +
+            "FROM leave_application la " +
+            "JOIN emp e ON la.emp_id = e.id")
     List<LeaveApplication> getAllLeaveApplications();
 
 

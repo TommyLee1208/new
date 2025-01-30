@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 public class TrainingEnrollment {
     private Integer id;
+    private String name;
     private Integer event_id;
     private Integer emp_id;
     private LocalDateTime enroll_time;

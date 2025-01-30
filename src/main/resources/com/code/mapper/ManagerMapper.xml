@@ -66,9 +66,10 @@
         order by update_time DESC
         limit #{start}, #{pageSize}
     </select>
+    <!--根据id来查询员工工资-->
     <select id="getSalariesByEmpId" resultType="com.code.pojo.Salary">
-        select * from salary
-        where emp_id = #{emp_id}
+        select s.* , e.name from salary s join emp e on s.emp_id = e.id
+        where s.emp_id = #{emp_id}
     </select>
 
 </mapper>

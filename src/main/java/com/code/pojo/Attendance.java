@@ -12,6 +12,7 @@ import java.time.LocalTime;
 public class Attendance {
     private Integer id;
     private Integer emp_id;
+    private String name;
     private LocalDateTime punch_time;
     private LocalTime scheduled_punch_time;
     private Boolean is_late;

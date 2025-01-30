@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Salary {
     private Integer emp_id;
+    private String name;
     private BigDecimal base_salary;
     private BigDecimal full_attendance_bonus;
     private LocalDateTime create_time;

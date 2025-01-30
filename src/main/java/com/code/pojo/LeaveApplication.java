@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class LeaveApplication {
     private Integer id;
     private Integer emp_id;
+    private String name;
     private Integer leave_type;
     private LocalDateTime start_time;
     private LocalDateTime end_time;
