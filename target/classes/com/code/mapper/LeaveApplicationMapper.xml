@@ -9,8 +9,9 @@
         values (#{emp_id}, #{leave_type}, #{start_time}, #{end_time}, #{approve_time}, now(), #{remarks})
     </insert>
     <select id="getLeaveApplicationByEmpId" resultType="com.code.pojo.LeaveApplication">
-        select * from leave_application where emp_id = #{emp_id}
-        order by apply_time desc
+        select a.* ,e.name from leave_application a join emp e on a.emp_id = e.id
+        where a.emp_id = #{empId}
+        order by a.apply_time desc
     </select>
 
 
